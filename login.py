@@ -31,14 +31,6 @@ def center(win):
     # after setting correct window position
     win.deiconify()
 
-def view(usuario):
-    comando = f""" SELECT * FROM logins
-    WHERE usuario = '{usuario}'
-"""
-    cursor.execute(comando)
-    resultado = cursor.fetchall()
-    print(resultado)
-
 # Configuracoes da base de dados
 # table name: logins
 # columns: id, usuario, senha, checkbox
@@ -70,7 +62,6 @@ def alterar_checkbox(usuario, valor):
     """
     cursor.execute(comando)
     conexao.commit()
-
 
 
 conexao = mysql.connector.connect(
@@ -129,11 +120,6 @@ senha2.place(x=100, y=130)
 senha = senha2.get()
 
 # Checkbox -> 0 = desativado; 1 = ativado.
-def trocar():
-    login = login2.get()
-    valor = check.get()
-    alterar_checkbox(login, valor)
-
 v = custom.IntVar()
 check = custom.CTkCheckBox(frame, text="Lembrar login", variable=v)
 check.place(x=53, y=173)
@@ -155,11 +141,9 @@ def entrar():
         elif senha != senha_correta:
             condicao.set("Senha incorreta.")
             senha2.delete(0, END)
-            # senha2.insert(0, "")
         elif senha == senha_correta:
-            trocar()
-            view(login)
-            # janela.after(150, janela.destroy())
+            alterar_checkbox(login, checkbox)
+            janela.after(150, janela.destroy())
             print("EXECUTA ACAO") ########################### -> Altere aqui o resultado
     except:
         condicao.set("Usuario não existe.")
