@@ -52,7 +52,6 @@ def get_login(usuario):
     resultado = cursor.fetchall()
     login = resultado[0][1].lower()
     senha = resultado[0][2]
-    checkbox = resultado[0][3] # FALTA ARRUMAR
     return login, senha
 
 def alterar_checkbox(usuario, valor):
@@ -73,6 +72,8 @@ conexao = mysql.connector.connect(
 print("Conexão bem sucedida!")
 cursor = conexao.cursor()
 
+
+# Tela
 f = ("Roboto", 15)
 
 custom.set_appearance_mode("Dark")
@@ -85,7 +86,7 @@ center(janela)
 # INICIO FILTRO DE AVISO
 warnings.filterwarnings("ignore")
 # Background
-img = PhotoImage(file=r"C:\Users\hugom\Desktop\Programacao\Sistema_de_login\newton.png") # Local da imagem. 
+img = PhotoImage(file="./newton.png") # Local da imagem. 
 # Dimensionamento da imagem
 img = img.zoom(35, 25) 
 img = img.subsample(70, 40)
@@ -107,8 +108,14 @@ text.place(x=50, y=20)
 login1 = custom.CTkLabel(frame, text="Login:", font=f)
 login1.place(x=50, y=75)
 login2 = custom.CTkEntry(frame, width=170, placeholder_text="Insira aqui seu usuário", font=f)
+####--------------------- TENTATIVA DE UTILIZAR A CHECKBOX ---------------------####
 # login_text = custom.StringVar()
-# login2 = custom.CTkEntry(frame, width=170, textvariable=login_text, font=f) # TENTATIVA DE UTILIZAR A CHECKBOX
+# if get_checkbox('hugo') == 1:
+#     login_text.set('hugo')
+# else:
+#     login_text.set('')
+# login2 = custom.CTkEntry(frame, width=170, textvariable=login_text, font=f) 
+####----------------------------------------------------------------------------####
 login2.place(x=100, y=75)
 login = login2.get()
 
